@@ -16,10 +16,12 @@ Download or checkout a recent version of LUFA in the same directory that the Lig
 
 ```
 git clone git://github.com/abcminiuser/lufa.git LUFA
-git checkout LUFA-130303
+cd LUFA
+git checkout tags/LUFA-130303
+cd ..
 ```
 
-Your source tree should look similiar to this
+The top of your source tree should look similiar to this
 
 ```
 drwxr-xr-x  14 jkf  staff  476 Apr  7 18:31 LEDLightMixer
@@ -33,5 +35,5 @@ cd LEDLightMixer
 make
 ```
 
-At the end of the build process, you will find .hex file ready to upload to the device.
+At the end of the build process, you will find a .hex file ready to upload to the device.
 

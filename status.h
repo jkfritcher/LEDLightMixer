@@ -4,8 +4,8 @@
 #include "time.h"
 
 typedef enum {
-  STATUS_STARTING = 0,
-  STATUS_IDLE
+    STATUS_STARTING = 0,
+    STATUS_IDLE
 } STATUS;
 
 void status_led_init(void);

@@ -98,7 +98,7 @@ const USB_Descriptor_Configuration_t PROGMEM ConfigurationDescriptor =
 
 			.Class                  = CDC_CSCP_CDCClass,
 			.SubClass               = CDC_CSCP_ACMSubclass,
-			.Protocol               = CDC_CSCP_ATCommandProtocol,
+			.Protocol               = CDC_CSCP_NoSpecificProtocol,
 
 			.InterfaceStrIndex      = NO_DESCRIPTOR
 		},

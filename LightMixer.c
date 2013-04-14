@@ -46,12 +46,6 @@ USB_ClassInfo_CDC_Device_t LightMixer_CDC_Interface =
             },
     };
 
-/** Standard file stream for the CDC interface when set up, so that the
- *  virtual CDC COM port can be used like any regular character stream
- *  in the C APIs
- */
-static FILE USBSerialStream;
-
 /** Main program entry point. This routine contains the overall program flow, including initial
  *  setup of all components and the main program loop.
  */
@@ -63,9 +57,6 @@ int main(void)
     RingBuffer_InitBuffer(&USB_Out_Buffer, USB_Out_Buffer_Data, sizeof(USB_Out_Buffer_Data));
     RingBuffer_InitBuffer(&USART_In_Buffer, USART_In_Buffer_Data, sizeof(USART_In_Buffer_Data));
     RingBuffer_InitBuffer(&USART_Out_Buffer, USART_Out_Buffer_Data, sizeof(USART_Out_Buffer_Data));
-
-    /* Create a regular character stream for the interface so that it can be used with the stdio.h functions */
-    CDC_Device_CreateStream(&LightMixer_CDC_Interface, &USBSerialStream);
 
     sei();
 

@@ -4,17 +4,17 @@
 #include "status.h"
 
 /* Circular buffers to hold data to and from the USB and USART devices. */
-static RingBuffer_t USB_In_Buffer;
-static uint8_t      USB_In_Buffer_Data[64];
+//static RingBuffer_t USB_In_Buffer;
+//static uint8_t      USB_In_Buffer_Data[64];
 
-static RingBuffer_t USB_Out_Buffer;
-static uint8_t      USB_Out_Buffer_Data[64];
+//static RingBuffer_t USB_Out_Buffer;
+//static uint8_t      USB_Out_Buffer_Data[64];
 
-static RingBuffer_t USART_In_Buffer;
-static uint8_t      USART_In_Buffer_Data[64];
+//static RingBuffer_t USART_In_Buffer;
+//static uint8_t      USART_In_Buffer_Data[64];
 
-static RingBuffer_t USART_Out_Buffer;
-static uint8_t      USART_Out_Buffer_Data[64];
+//static RingBuffer_t USART_Out_Buffer;
+//static uint8_t      USART_Out_Buffer_Data[64];
 
 /** LUFA CDC Class driver interface configuration and state information. This structure is
  *  passed to all CDC Class driver functions, so that multiple instances of the same class
@@ -53,10 +53,10 @@ int main(void)
 {
     SetupHardware();
 
-    RingBuffer_InitBuffer(&USB_In_Buffer, USB_In_Buffer_Data, sizeof(USB_In_Buffer_Data));
-    RingBuffer_InitBuffer(&USB_Out_Buffer, USB_Out_Buffer_Data, sizeof(USB_Out_Buffer_Data));
-    RingBuffer_InitBuffer(&USART_In_Buffer, USART_In_Buffer_Data, sizeof(USART_In_Buffer_Data));
-    RingBuffer_InitBuffer(&USART_Out_Buffer, USART_Out_Buffer_Data, sizeof(USART_Out_Buffer_Data));
+    //RingBuffer_InitBuffer(&USB_In_Buffer, USB_In_Buffer_Data, sizeof(USB_In_Buffer_Data));
+    //RingBuffer_InitBuffer(&USB_Out_Buffer, USB_Out_Buffer_Data, sizeof(USB_Out_Buffer_Data));
+    //RingBuffer_InitBuffer(&USART_In_Buffer, USART_In_Buffer_Data, sizeof(USART_In_Buffer_Data));
+    //RingBuffer_InitBuffer(&USART_Out_Buffer, USART_Out_Buffer_Data, sizeof(USART_Out_Buffer_Data));
 
     sei();
 

@@ -1,6 +1,7 @@
 
 #include "LightMixer.h"
 #include "hatch_switch.h"
+#include "led_strip.h"
 #include "millis.h"
 #include "status_led.h"
 
@@ -69,13 +70,9 @@ int main(void)
         status_led_update(now);
 
         if (hatch_switch_get_value() == HATCH_VALUE_CLOSED) {
-            OCR1A = 0; /* blue */
-            OCR1B = 0; /* green */
-            OCR1C = 0; /* red */
+            led_strip_set_value(0, 0, 0);
         } else {
-            OCR1A = 127; /* blue */
-            OCR1B = 127; /* green */
-            OCR1C = 127; /* red */
+            led_strip_set_value(127, 127, 127);
         }
 
         /* Must throw away unused bytes from the host, or it will lock up while waiting for the device */
@@ -102,15 +99,8 @@ void SetupHardware(void)
     /* Init status LED */
     status_led_init();
 
-    /* Setup Timer 1A-C for PWM mode */
-    DDRB |= (1 << DDB7) | (1 << DDB6) | (1 << DDB5); /* Set B5-7 as outputs */
-    PORTB &= ~((1 << PORTB7) | (1 << PORTB6) | (1 << PORTB5)); /* Disable pull-ups */
-    /* PWM, Phase correct, 8-bit, CLK_IO / 8, PWM @ 245.1 Hz */
-    TCCR1B = (1 << CS11);
-    TCCR1A = (1 << COM1A1) | (1 << COM1B1) | (1 << COM1C1) | (1 << WGM10);
-    OCR1A = 0; /* blue */
-    OCR1B = 0; /* green */
-    OCR1C = 0; /* red */
+    /* Init led strip outputs */
+    led_strip_init();
 
     /* Init hatch switch */
     hatch_switch_init();

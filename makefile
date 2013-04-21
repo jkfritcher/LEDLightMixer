@@ -135,6 +135,7 @@ include $(LUFA_PATH)/LUFA/makefile
 SRC = $(TARGET).c                                                 \
 	  Descriptors.c                                               \
       hatch_switch.c                                              \
+      led_strip.c                                                 \
 	  millis.c                                                    \
 	  status_led.c                                                \
 	  $(LUFA_SRC_USB)                                             \

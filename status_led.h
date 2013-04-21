@@ -1,5 +1,5 @@
-#ifndef _LM_STATUS_H_
-#define _LM_STATUS_H_
+#ifndef _LM_STATUS_LED_H_
+#define _LM_STATUS_LED_H_
 
 #include "millis.h"
 
@@ -12,4 +12,4 @@ void status_led_init(void);
 void status_led_update(millis_t now);
 void status_led_change_status(STATUS s);
 
-#endif /* _LM_STATUS_H_ */
+#endif /* _LM_STATUS_LED_H_ */

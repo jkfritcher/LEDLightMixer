@@ -1,7 +1,7 @@
 #include <avr/io.h>
 
 #include "millis.h"
-#include "status.h"
+#include "status_led.h"
 
 typedef struct {
     uint8_t total_states;

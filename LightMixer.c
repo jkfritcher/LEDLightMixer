@@ -1,5 +1,6 @@
 
 #include "LightMixer.h"
+#include "hatch_switch.h"
 #include "millis.h"
 #include "status_led.h"
 
@@ -67,7 +68,7 @@ int main(void)
         now = millis_get_millis();
         status_led_update(now);
 
-        if ((PINB & (1 << PORTB4)) != 0) {
+        if (hatch_switch_get_value() == HATCH_VALUE_CLOSED) {
             OCR1A = 0; /* blue */
             OCR1B = 0; /* green */
             OCR1C = 0; /* red */
@@ -111,9 +112,8 @@ void SetupHardware(void)
     OCR1B = 0; /* green */
     OCR1C = 0; /* red */
 
-    /* Init switch input */
-    DDRB &= ~(1 << DDB4); /* Set B4 as input */
-    PORTB |= (1 << PORTB4); /* Enable pull-up */
+    /* Init hatch switch */
+    hatch_switch_init();
 
     /* Hardware Initialization */
     USB_Init();

@@ -3,13 +3,13 @@
 #include <avr/interrupt.h>
 #include <util/atomic.h>
 
-#include "time.h"
+#include "millis.h"
 
 static volatile millis_t milliseconds = 0;
 
 static millis_t max_millis = ((uint64_t)1 << (sizeof(millis_t) * 8)) - 1;
 
-millis_t time_difference(millis_t a, millis_t b)
+millis_t millis_time_difference(millis_t a, millis_t b)
 {
     if (a >= b) {
         return a - b;
@@ -18,7 +18,7 @@ millis_t time_difference(millis_t a, millis_t b)
     }
 }
 
-millis_t millis_get(void)
+millis_t millis_get_millis(void)
 {
     millis_t ms;
     ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
@@ -28,7 +28,7 @@ millis_t millis_get(void)
     return ms;
 }
 
-void init_elapsed_timer(void)
+void millis_init(void)
 {
     TCCR0A = (1 << WGM01); /* CTC */
     TCCR0B = (1 << CS01); /* CLK_IO / 8 */

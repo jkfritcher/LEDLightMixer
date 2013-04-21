@@ -1,6 +1,6 @@
 
 #include "LightMixer.h"
-#include "time.h"
+#include "millis.h"
 #include "status.h"
 
 /* Circular buffers to hold data to and from the USB and USART devices. */
@@ -64,7 +64,7 @@ int main(void)
     millis_t now;
     for (;;)
     {
-        now = millis_get();
+        now = millis_get_millis();
         status_led_update(now);
 
         if ((PINB & (1 << PORTB4)) != 0) {
@@ -96,7 +96,7 @@ void SetupHardware(void)
     clock_prescale_set(clock_div_16);
 
     /* Setup elapsed time timer */
-    init_elapsed_timer();
+    millis_init();
 
     /* Init status LED */
     status_led_init();

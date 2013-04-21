@@ -1,6 +1,6 @@
 #include <avr/io.h>
 
-#include "time.h"
+#include "millis.h"
 #include "status.h"
 
 typedef struct {
@@ -28,7 +28,7 @@ void status_led_init(void)
 
 void status_led_update(millis_t now)
 {
-    millis_t diff = time_difference(now, last_change);
+    millis_t diff = millis_time_difference(now, last_change);
 
     uint8_t i = LED_STATE[status].current_state;
     if (diff >= LED_STATE[status].states[i]) {
@@ -43,7 +43,7 @@ void status_led_change_status(STATUS s)
     if (s != status) {
         LED_STATE[s].current_state = 0;
         status = s;
-        last_change = millis_get();
+        last_change = millis_get_millis();
     }
 }
 

@@ -1,7 +1,7 @@
 #ifndef _LM_STATUS_H_
 #define _LM_STATUS_H_
 
-#include "time.h"
+#include "millis.h"
 
 typedef enum {
     STATUS_STARTING = 0,

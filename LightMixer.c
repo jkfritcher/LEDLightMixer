@@ -70,9 +70,9 @@ int main(void)
         status_led_update(now);
 
         if (hatch_switch_get_value() == HATCH_VALUE_CLOSED) {
-            led_strip_set_value(0, 0, 0);
+            led_strip_off();
         } else {
-            led_strip_set_value(127, 127, 127);
+            led_strip_on();
         }
 
         /* Must throw away unused bytes from the host, or it will lock up while waiting for the device */

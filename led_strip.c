@@ -1,6 +1,22 @@
 #include <avr/io.h>
+#include <stdbool.h>
 
 #include "led_strip.h"
+
+static bool turned_on = false;
+static uint8_t brightness = 255;
+static uint8_t red = 127;
+static uint8_t green = 127;
+static uint8_t blue = 127;
+
+static
+void set_outputs(void)
+{
+    uint32_t t = ((brightness * 1000UL + 254) / 255);
+    OCR1A = (uint8_t)((blue * t) / 1000UL);
+    OCR1B = (uint8_t)((green * t) / 1000UL);
+    OCR1C = (uint8_t)((red * t) / 1000UL);
+}
 
 void led_strip_init(void)
 {
@@ -16,9 +32,34 @@ void led_strip_init(void)
     OCR1C = 0; /* red */
 }
 
-void led_strip_set_value(uint8_t red, uint8_t green, uint8_t blue)
+void led_strip_set_brightness(uint8_t val)
 {
-    OCR1A = blue;
-    OCR1B = green;
-    OCR1C = red;
+    brightness = val;
+    if (turned_on) {
+        set_outputs();
+    }
+}
+
+void led_strip_set_color(uint8_t r, uint8_t g, uint8_t b)
+{
+    red = r;
+    green = g;
+    blue = b;
+    if (turned_on) {
+        set_outputs();
+    }
+}
+
+void led_strip_on(void)
+{
+    turned_on = true;
+    set_outputs();
+}
+
+void led_strip_off(void)
+{
+    OCR1A = 0;
+    OCR1B = 0;
+    OCR1C = 0;
+    turned_on = false;
 }

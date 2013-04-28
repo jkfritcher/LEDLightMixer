@@ -1,0 +1,13 @@
+SF,1
+R,1
+
+SA,1
+SE,1
+SM,0
+SN,Testing
+SO,^
+SP,12345678
+ST,253
+SU,9600
+
+R,1

@@ -75,8 +75,16 @@ int main(void)
             led_strip_on();
         }
 
-        /* Must throw away unused bytes from the host, or it will lock up while waiting for the device */
-        CDC_Device_ReceiveByte(&LightMixer_CDC_Interface);
+        if (USB_DeviceState == DEVICE_STATE_Configured) {
+            uint16_t count = CDC_Device_BytesReceived(&LightMixer_CDC_Interface);
+            while(count > 0) {
+                uint16_t byte = CDC_Device_ReceiveByte(&LightMixer_CDC_Interface);
+                if (byte >= 0) {
+                    CDC_Device_SendByte(&LightMixer_CDC_Interface, (uint8_t)byte);
+                }
+                count--;
+            }
+        }
 
         CDC_Device_USBTask(&LightMixer_CDC_Interface);
         USB_USBTask();

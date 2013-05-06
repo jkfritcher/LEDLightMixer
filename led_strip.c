@@ -4,13 +4,13 @@
 #include "led_strip.h"
 
 static bool turned_on = false;
-static uint8_t brightness = 255;
-static uint8_t red = 127;
-static uint8_t green = 127;
-static uint8_t blue = 127;
+static uint8_t brightness = 127;
+static uint8_t red = 255;
+static uint8_t green = 255;
+static uint8_t blue = 255;
 
 static
-void set_outputs(void)
+void update_outputs(void)
 {
     uint32_t t = ((brightness * 1000UL + 254) / 255);
     OCR1A = (uint8_t)((blue * t) / 1000UL);
@@ -36,7 +36,7 @@ void led_strip_set_brightness(uint8_t val)
 {
     brightness = val;
     if (turned_on) {
-        set_outputs();
+        update_outputs();
     }
 }
 
@@ -46,14 +46,14 @@ void led_strip_set_color(uint8_t r, uint8_t g, uint8_t b)
     green = g;
     blue = b;
     if (turned_on) {
-        set_outputs();
+        update_outputs();
     }
 }
 
 void led_strip_on(void)
 {
     turned_on = true;
-    set_outputs();
+    update_outputs();
 }
 
 void led_strip_off(void)
